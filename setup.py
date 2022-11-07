@@ -1,10 +1,10 @@
 # *********************************************************************
 #  This file is part of svgdigitizer.
 #
-#        Copyright (C) 2021 Albert Engstfeld
-#        Copyright (C) 2021 Johannes Hermann
-#        Copyright (C) 2021 Julian Rüth
-#        Copyright (C) 2021 Nicolas Hörmann
+#        Copyright (C)      2021 Albert Engstfeld
+#        Copyright (C)      2021 Johannes Hermann
+#        Copyright (C) 2021-2022 Julian Rüth
+#        Copyright (C)      2021 Nicolas Hörmann
 #
 #  svgdigitizer is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -19,7 +19,6 @@
 #  You should have received a copy of the GNU General Public License
 #  along with svgdigitizer. If not, see <https://www.gnu.org/licenses/>.
 # *********************************************************************
-import os
 import setuptools
 from distutils.core import setup
 
@@ -35,7 +34,7 @@ setup(
     install_requires=[
         "astropy>=5,<6",
         "click>=8,<9",
-        "frictionless>=4,<5",
+        "frictionless>=4.28.2,<5",
         "matplotlib>=3.5,<4",
         "mergedeep>=1.3.4,<2",
         "pandas>=1.3,<2",
