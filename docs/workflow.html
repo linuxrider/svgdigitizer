@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digitizing plots for echemdb &mdash; svgdigitizer 0.11.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" type="text/css" />
+      <link rel="stylesheet" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=f3b36f1a"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/design-tabs.js?v=36754332"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="svgdigitizer.svgfigure" href="api/svgfigure.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            svgdigitizer
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command Line Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Digitizing plots for echemdb</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#step-1-prepare-pdf-and-bib-files">Step 1: Prepare PDF and BIB files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-2-prepare-svg-and-png-files-from-the-pdf">Step 2: Prepare SVG and PNG files from the PDF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-3-digitize-a-plot">Step 3: Digitize a plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-4-create-a-metadata-file-for-each-digitized-curve">Step 4: Create a metadata file for each digitized curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-5-submit-to-echemdb-org">Step 5: Submit to echemdb.org</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#notes">Notes</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">svgdigitizer</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Digitizing plots for echemdb</li>
+  
+  
+    
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/echemdb/svgdigitizer/blob/master/doc/workflow.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="digitizing-plots-for-echemdb">
+<h1>Digitizing plots for echemdb<a class="headerlink" href="#digitizing-plots-for-echemdb" title="Link to this heading"></a></h1>
+<p>The <a class="reference external" href="https://www.echemdb.org/cv">echemdb.org</a> collection accepts plots commonly found in electrochemical research papers, e.g., cyclic voltammograms. The following example plot is provided in Figure 2a in the <a class="reference download internal" download="" href="_downloads/c132c4fecdaf6f5f2f413d91ce87064d/mustermann_2021_svgdigitizer_1.pdf"><code class="xref download docutils literal notranslate"><span class="pre">publication</span> <span class="pre">example</span> <span class="pre">(PDF)</span></code></a>.</p>
+<a class="bg-primary mb-1 reference internal image-reference" href="_images/sample_data_21.png"><img alt="_images/sample_data_21.png" class="bg-primary mb-1 align-center" src="_images/sample_data_21.png" style="width: 450px;" /></a>
+<p>Data uploaded to <a class="reference external" href="https://www.echemdb.org/cv">echemdb.org</a> requires specifically annotated SVG files, including a specific metadata file, and a bibliography file explained in the following step by step tutorial.</p>
+<section id="step-1-prepare-pdf-and-bib-files">
+<h2>Step 1: Prepare PDF and BIB files<a class="headerlink" href="#step-1-prepare-pdf-and-bib-files" title="Link to this heading"></a></h2>
+<p><strong>1: Create a new directory</strong></p>
+<p>The directory should be named <code class="docutils literal notranslate"><span class="pre">FirstAuthorName_Year_FirstTitleWord_FirstPageNr</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Only use lowercase names and words.</strong></p>
+</div>
+<p>For the example PDF this comes down to</p>
+<p><code class="docutils literal notranslate"><span class="pre">mustermann_2021_svgdigitizer_1</span></code></p>
+<p>The page number should be the page number in the published pdf. Since the example is not published the page number is <code class="docutils literal notranslate"><span class="pre">1</span></code>. In other cases this could be <code class="docutils literal notranslate"><span class="pre">1021</span></code>.</p>
+<p>Put the publication PDF in the newly created directory. The PDF should be named according to the same scheme:</p>
+<p><code class="docutils literal notranslate"><span class="pre">mustermann_2021_svgdigitizer_1.pdf</span></code></p>
+<p><strong>2: Place a BIB file in the folder</strong></p>
+<p>A suggested approach is to search for the article with <a class="reference external" href="https://scholar.google.com/">Google Scholar</a>.</p>
+<p>Modify the scholar settings so that a BibTeX link appears below the citation:</p>
+<p>Click on the 3 lines next to the Google Scholar logo and choose <em><strong>Settings</strong></em></p>
+<a class="bg-primary mb-1 reference internal image-reference" href="_images/scholar_options_selection.png"><img alt="_images/scholar_options_selection.png" class="bg-primary mb-1 align-center" src="_images/scholar_options_selection.png" style="width: 200px;" /></a>
+<p>Select <code class="docutils literal notranslate"><span class="pre">Show</span> <span class="pre">links</span> <span class="pre">to</span> <span class="pre">import</span> <span class="pre">citations</span> <span class="pre">into</span> <span class="pre">BibTeX</span></code></p>
+<a class="bg-primary mb-1 reference internal image-reference" href="_images/scholar_options_bibtex.png"><img alt="_images/scholar_options_bibtex.png" class="bg-primary mb-1 align-center" src="_images/scholar_options_bibtex.png" style="width: 300px;" /></a>
+<p>An <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">into</span> <span class="pre">BibTeX</span></code> link appears below the linked article:</p>
+<a class="bg-primary mb-1 reference internal image-reference" href="_images/scholar_options_bibtex_link.png"><img alt="_images/scholar_options_bibtex_link.png" class="bg-primary mb-1 align-center" src="_images/scholar_options_bibtex_link.png" style="width: 500px;" /></a>
+<p>Download the bib file or save the content to a file named:</p>
+<p><code class="docutils literal notranslate"><span class="pre">mustermann_2021_svgdigitizer_1.bib</span></code></p>
+<p>Open the file and change the key, such that it matches the folder name:</p>
+<a class="bg-primary mb-1 reference internal image-reference" href="_images/bibtex_key.png"><img alt="_images/bibtex_key.png" class="bg-primary mb-1 align-center" src="_images/bibtex_key.png" style="width: 550px;" /></a>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Fix any typos in the title and other entries if necessary.</p>
+</div>
+<p><strong>The folder should now contain the following files:</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">mustermann_2021_svgdigitizer_1.bib</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">mustermann_2021_svgdigitizer_1.pdf</span></code></p>
+</section>
+<section id="step-2-prepare-svg-and-png-files-from-the-pdf">
+<h2>Step 2: Prepare SVG and PNG files from the PDF<a class="headerlink" href="#step-2-prepare-svg-and-png-files-from-the-pdf" title="Link to this heading"></a></h2>
+<p>Use the <a class="reference internal" href="cli.html"><span class="doc std std-doc">CLI</span></a> to create SVG and PNG files from the PDF, i.e., execute the following command in the folder with the PDF.</p>
+<div class="cell tag_remove-stderr docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>svgdigitizer<span class="w"> </span>paginate<span class="w"> </span>mustermann_2021_svgdigitizer_1.pdf
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Traceback (most recent call last):
+  File &quot;/usr/share/miniconda3/envs/test/lib/python3.11/site-packages/pdf2image/pdf2image.py&quot;, line 589, in pdfinfo_from_path
+    raise ValueError
+ValueError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File &quot;/usr/share/miniconda3/envs/test/bin/svgdigitizer&quot;, line 33, in &lt;module&gt;
+    sys.exit(load_entry_point(&#39;svgdigitizer&#39;, &#39;console_scripts&#39;, &#39;svgdigitizer&#39;)())
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;/usr/share/miniconda3/envs/test/lib/python3.11/site-packages/click/core.py&quot;, line 1128, in __call__
+    return self.main(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;/usr/share/miniconda3/envs/test/lib/python3.11/site-packages/click/core.py&quot;, line 1053, in main
+    rv = self.invoke(ctx)
+         ^^^^^^^^^^^^^^^^
+  File &quot;/usr/share/miniconda3/envs/test/lib/python3.11/site-packages/click/core.py&quot;, line 1659, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;/usr/share/miniconda3/envs/test/lib/python3.11/site-packages/click/core.py&quot;, line 1395, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;/usr/share/miniconda3/envs/test/lib/python3.11/site-packages/click/core.py&quot;, line 754, in invoke
+    return __callback(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;/home/runner/work/svgdigitizer/svgdigitizer/svgdigitizer/entrypoint.py&quot;, line 567, in paginate
+    pages = convert_from_path(pdf, dpi=600)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;/usr/share/miniconda3/envs/test/lib/python3.11/site-packages/pdf2image/pdf2image.py&quot;, line 127, in convert_from_path
+    page_count = pdfinfo_from_path(
+                 ^^^^^^^^^^^^^^^^^^
+  File &quot;/usr/share/miniconda3/envs/test/lib/python3.11/site-packages/pdf2image/pdf2image.py&quot;, line 598, in pdfinfo_from_path
+    raise PDFPageCountError(
+pdf2image.exceptions.PDFPageCountError: Unable to get page count.
+I/O Error: Couldn&#39;t open file &#39;mustermann_2021_svgdigitizer_1.pdf&#39;: No such file or directory.
+</pre></div>
+</div>
+</div>
+</div>
+<p>The resulting filenames are of the form:</p>
+<p><code class="docutils literal notranslate"><span class="pre">mustermann_2021_svgdigitizer_1_p0.png</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">mustermann_2021_svgdigitizer_1_p0.svg</span></code></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The page count starts from 0. It does not reflect the original page number in the PDF.</p>
+</div>
+</section>
+<section id="step-3-digitize-a-plot">
+<h2>Step 3: Digitize a plot<a class="headerlink" href="#step-3-digitize-a-plot" title="Link to this heading"></a></h2>
+<p><strong>1: Select an svg file with a plot to be digitized</strong></p>
+<p>The data in Figure 2a in the example PDF on page 2 (filename containing <code class="docutils literal notranslate"><span class="pre">_p1</span></code>)  contains three curves, which can be identified by their colors. Each digitized curve should be in a separate SVG file.
+Therefore, create a copy of the SVG file of page two (<code class="docutils literal notranslate"><span class="pre">mustermann_2021_svgdigitizer_1_p1.svg</span></code>) and rename it to<code class="docutils literal notranslate"><span class="pre">mustermann_2021_svgdigitizer_1_f2a_blue.svg</span></code>. Here, <code class="docutils literal notranslate"><span class="pre">_f2a_blue</span></code> indicates that the digitized curve is in Fig. 2b and that the curve is blue. The identifier will later also be included in the SVG file.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">_p1</span></code> can be ommited since the figure can unambiguously be identified by the figure and curve identifier label, e.g., <code class="docutils literal notranslate"><span class="pre">_f2a_blue</span></code>).</p>
+</div>
+<p><strong>2: Annotate the SVG and curve tracing</strong></p>
+<p>In principle the SVG is annotated and the curve us traced in the same way as described in the <a class="reference internal" href="usage.html"><span class="doc std std-doc">usage</span></a> section. A few additional notes are provide below the <a class="reference download internal" download="" href="_downloads/fc4051acb4e89bd50929129aca2cfdd3/mustermann_2021_svgdigitizer_1_f2a_blue.svg"><code class="xref download docutils literal notranslate"><span class="pre">annotated</span> <span class="pre">SVG</span></code></a>.</p>
+<a class="bg-primary mb-1 reference internal image-reference" href="_images/inkscape_final.png"><img alt="_images/inkscape_final.png" class="bg-primary mb-1 align-center" src="_images/inkscape_final.png" style="width: 550px;" /></a>
+<p>Some remarks on the specific annotations:</p>
+<ul class="simple">
+<li><p>The units on the x-axis must be equivalent to a voltage <code class="docutils literal notranslate"><span class="pre">U</span></code> given in units of <code class="docutils literal notranslate"><span class="pre">V</span></code> and those on the y-axis equivalent to current <code class="docutils literal notranslate"><span class="pre">I</span></code> in units of <code class="docutils literal notranslate"><span class="pre">A</span></code> or current density <code class="docutils literal notranslate"><span class="pre">j</span></code> in units of <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">/</span> <span class="pre">m2</span></code>.</p></li>
+<li><p>The voltage unit can given vs. a reference, such as <code class="docutils literal notranslate"><span class="pre">V</span> <span class="pre">vs.</span> <span class="pre">RHE</span></code>. In that case the dimension should be a potential <code class="docutils literal notranslate"><span class="pre">E</span></code> instead of voltage <code class="docutils literal notranslate"><span class="pre">U</span></code>.</p></li>
+<li><p>The curve identifier should be a short unambiguous string, preferably without special characters.</p></li>
+<li><p>A scan rate is mandatory. The information is not necessarily found in the figure (legend).</p></li>
+<li><p>Add a figure identifier such as <code class="docutils literal notranslate"><span class="pre">figure:</span> <span class="pre">2a</span></code></p></li>
+<li><p>Add tags describing the data with commonly used acronyms. In this case: <code class="docutils literal notranslate"><span class="pre">tags:</span> <span class="pre">BCV,</span> <span class="pre">HER</span></code>. Otherwise the data can hardly be classified.</p></li>
+<li><p>Feel free to add a comment to the plot. Use a full sentence, for example, <code class="docutils literal notranslate"><span class="pre">comment:</span> <span class="pre">The</span> <span class="pre">curve</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">bit</span> <span class="pre">noisy.</span></code></p></li>
+<li><p>Add a text field highlighting any additional measurements which were acquired simultaneously with the digitized curve and are shown in the same figure. In the example, the bottom plot shows DEMS data. This can be indicated by <code class="docutils literal notranslate"><span class="pre">linked:</span> <span class="pre">DEMS</span></code>. The field can contain multiple types of measurements if applicable. Also feel free to use acronyms commonly used in the community.</p></li>
+</ul>
+</section>
+<section id="step-4-create-a-metadata-file-for-each-digitized-curve">
+<h2>Step 4: Create a metadata file for each digitized curve<a class="headerlink" href="#step-4-create-a-metadata-file-for-each-digitized-curve" title="Link to this heading"></a></h2>
+<p>Create a YAML file with the same name as the SVG file: <code class="docutils literal notranslate"><span class="pre">mustermann_2021_svgdigitizer_1_f2a_blue.yaml</span></code></p>
+<p>The general structure of the yaml file for the website is provided at <a class="reference external" href="https://github.com/echemdb/metadata-schema/blob/main/examples/file_schemas/svgdigitizer.yaml">echemdb/electrochemistry-metadata-schema</a>. Howevere, it is possibly more convenient to reuse existing YAML files which exist already in the <a class="reference external" href="https://github.com/echemdb/website/tree/main/literature">repository</a></p>
+<p>Adjust all keys in the file according to the content of the research article.</p>
+</section>
+<section id="step-5-submit-to-echemdb-org">
+<h2>Step 5: Submit to echemdb.org<a class="headerlink" href="#step-5-submit-to-echemdb-org" title="Link to this heading"></a></h2>
+<p>Propose a pull request in the GitHub repository that adds your directory to <code class="docutils literal notranslate"><span class="pre">website/literature</span></code>, e.g., by uploading the YAML, SVG and BIB files you created at https://github.com/echemdb/website/upload/main/literature/mustermann_2021_svgdigitizer_1 (replace <code class="docutils literal notranslate"><span class="pre">mustermann_2021_svgdigitizer_1</span></code> with the name of your data).</p>
+</section>
+<section id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Link to this heading"></a></h2>
+<p>If you want to test whether your files were prepared correctly for <a class="reference external" href="https://www.echemdb.org/cv">echemdb.org</a>, run:</p>
+<p><code class="docutils literal notranslate"><span class="pre">svgdigitizer</span> <span class="pre">cv</span> <span class="pre">mustermann_2021_svgdigitizer_1_f2a_blue.svg</span> <span class="pre">--metadata</span> <span class="pre">mustermann_2021_svgdigitizer_1_f2a_blue.yaml</span> <span class="pre">--sampling-interval</span> <span class="pre">0.001</span> <span class="pre">--bibliography</span></code></p>
+<p>This creates a CSV with the data of the plot and a JSON package file that you can inspect to verify that the data has been correctly extracted.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="api/svgfigure.html" class="btn btn-neutral float-left" title="svgdigitizer.svgfigure" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2023, the svgdigitizer authors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
