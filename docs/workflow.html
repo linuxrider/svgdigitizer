@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Digitizing plots for echemdb &mdash; svgdigitizer 0.13.0 documentation</title>
+  <title>Digitizing plots for echemdb &mdash; svgdigitizer 0.13.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
@@ -15,7 +15,7 @@
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=1019fba8"></script>
+      <script src="_static/documentation_options.js?v=b4617fb1"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="_static/design-tabs.js?v=f930bc37"></script>
@@ -161,8 +161,19 @@
            <span class=" -Color -Color-Red">~~~~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>
   File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/svgdigitizer/svgdigitizer/.pixi/envs/dev/lib/python3.14/site-packages/click/core.py&quot;</span>, line <span class=" -Color -Color-Magenta">814</span>, in <span class=" -Color -Color-Magenta">invoke</span>
     return callback(*args, **kwargs)
-  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/svgdigitizer/svgdigitizer/svgdigitizer/entrypoint.py&quot;</span>, line <span class=" -Color -Color-Magenta">678</span>, in <span class=" -Color -Color-Magenta">paginate</span>
-    doc = pymupdf.open(pdf)
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/svgdigitizer/svgdigitizer/svgdigitizer/entrypoint.py&quot;</span>, line <span class=" -Color -Color-Magenta">786</span>, in <span class=" -Color -Color-Magenta">paginate</span>
+    page_range = range(<span class=" -Color -Color-Bold -Color-Bold-Red">doc.num_pages</span>)
+                       <span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^^^^^^^^</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/svgdigitizer/svgdigitizer/.pixi/envs/dev/lib/python3.14/functools.py&quot;</span>, line <span class=" -Color -Color-Magenta">1127</span>, in <span class=" -Color -Color-Magenta">__get__</span>
+    val = self.func(instance)
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/svgdigitizer/svgdigitizer/svgdigitizer/pdf.py&quot;</span>, line <span class=" -Color -Color-Magenta">241</span>, in <span class=" -Color -Color-Magenta">num_pages</span>
+    return <span class=" -Color -Color-Bold -Color-Bold-Red">self.doc</span>.page_count
+           <span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^^^</span>
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/svgdigitizer/svgdigitizer/.pixi/envs/dev/lib/python3.14/functools.py&quot;</span>, line <span class=" -Color -Color-Magenta">1127</span>, in <span class=" -Color -Color-Magenta">__get__</span>
+    val = self.func(instance)
+  File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/svgdigitizer/svgdigitizer/svgdigitizer/pdf.py&quot;</span>, line <span class=" -Color -Color-Magenta">169</span>, in <span class=" -Color -Color-Magenta">doc</span>
+    return <span class=" -Color -Color-Red">pymupdf.open</span><span class=" -Color -Color-Bold -Color-Bold-Red">(self.filepath)</span>
+           <span class=" -Color -Color-Red">~~~~~~~~~~~~</span><span class=" -Color -Color-Bold -Color-Bold-Red">^^^^^^^^^^^^^^^</span>
   File <span class=" -Color -Color-Magenta">&quot;/home/runner/work/svgdigitizer/svgdigitizer/.pixi/envs/dev/lib/python3.14/site-packages/pymupdf/__init__.py&quot;</span>, line <span class=" -Color -Color-Magenta">2975</span>, in <span class=" -Color -Color-Magenta">__init__</span>
     raise FileNotFoundError(f&quot;no such file: &#39;{filename}&#39;&quot;)
 <span class=" -Color -Color-Bold -Color-Bold-Magenta">pymupdf.FileNotFoundError</span>: <span class=" -Color -Color-Magenta">no such file: &#39;/files/mustermann_2021_svgdigitizer_1/mustermann_2021_svgdigitizer_1.pdf&#39;</span>
