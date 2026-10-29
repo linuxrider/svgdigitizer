@@ -4,6 +4,87 @@ svgdigitizer Change Log
 
 .. current developments
 
+v0.14.5
+====================
+
+**Changed:**
+
+* Changed upper bound of astropy dependency to v9.
+
+**Fixed:**
+
+* Fixed `build_identfier` for bibtex citations without pages.
+* Fixed converting special characters to unicode in bibliographic entries.
+
+
+
+v0.14.4
+====================
+
+**Changed:**
+
+* Changed lower version bound of pymupdf to 1.27.1 to ensure compatibility with all platforms.
+
+
+
+v0.14.3
+====================
+
+**Changed:**
+
+* Changed label distance calculation to use perpendicular distance to text direction which works better with some edge cases.
+
+
+
+v0.14.2
+====================
+
+**Added:**
+
+* Added `_warn_about_metadata_conflicts` to `SVGFigure` to warn about metadata replaced in the provided metadata by metadata extracted from the SVG.
+* Added `pdf.PDF` to the API section of the documentation.
+
+**Changed:**
+
+* Allow ` `, `-` and `_` in reference point labels in the svg.
+* Improve error message when the number of detected variables != 2.
+
+**Fixed:**
+
+* Fixed creation of identifier in `pdf.PDF`, to keep first meaningful word of the title.
+
+
+
+v0.14.1
+====================
+
+**Changed:**
+
+* Changed version constraint again `pymupdf>=1.26,<2`.
+
+
+
+v0.14.0
+====================
+
+**Added:**
+
+* Added `--citation-key` to parse the name of a bibliography entry in the bibliography file parsed with `--bibliography`.
+* Added support for direnv. https://pixi.sh/dev/integration/third_party/direnv/
+* Added `--doi` option to explicitly set DOI for paginate cli command.
+
+**Changed:**
+
+* Changed `--bibliography` from type bolean to path, containing BibTex entries.
+* Changed `--pages` option page indices for paginate cli command to start at 1 instead of 0.
+
+**Fixed:**
+
+* Fixed handling of `--pages` for paginate cli command.
+* Fixed inclusion of basic template in python package.
+
+
+
 v0.13.1
 ====================
 

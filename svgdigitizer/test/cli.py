@@ -138,6 +138,10 @@ class TemporaryData:
             ],
         ),
         (
+            "label_distance_calculation",
+            ["cv", "label_distance_calculation.svg", "--si-units"],
+        ),
+        (
             "cv_comment",
             ["cv", "cv_comment.svg", "--metadata", "cv_comment.yaml", "--si-units"],
         ),
@@ -155,6 +159,21 @@ class TemporaryData:
                 "cv_bibliography.yaml",
                 "--si-units",
                 "--bibliography",
+                "bibliography.bib",
+            ],
+        ),
+        (
+            "cv_bibliography_key",
+            [
+                "cv",
+                "cv_bibliography_key.svg",
+                "--metadata",
+                "cv_bibliography_key.yaml",
+                "--si-units",
+                "--bibliography",
+                "bibliography.bib",
+                "--citation-key",
+                "custom_key",
             ],
         ),
         (
@@ -166,6 +185,7 @@ class TemporaryData:
                 "package_no_bibliography.yaml",
                 "--si-units",
                 "--bibliography",
+                "bibliography.bib",
             ],
         ),
         (
@@ -177,6 +197,7 @@ class TemporaryData:
                 "figure_bibliography.yaml",
                 "--si-units",
                 "--bibliography",
+                "bibliography.bib",
             ],
         ),
         (
@@ -199,7 +220,7 @@ def test_svgdigitizer_cli(name, args):
     Test that the svgdigitizer CLI commands produce the expected CSV and JSON outputs.
     """
     cwd = os.getcwd()
-    with TemporaryData(f"data/{name}.*", "data/*.bib") as workdir:
+    with TemporaryData(f"data/{name}.*", "bibliography/bibliography.bib") as workdir:
         os.chdir(workdir)
         try:
             from svgdigitizer.entrypoint import cli
