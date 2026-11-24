@@ -6,16 +6,16 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome to svgdigitizer’s documentation! &mdash; svgdigitizer 0.13.1 documentation</title>
+  <title>Welcome to svgdigitizer’s documentation! &mdash; svgdigitizer 0.16.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
-      <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
       <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=b4617fb1"></script>
+      <script src="_static/documentation_options.js?v=7de89ed4"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="_static/design-tabs.js?v=f930bc37"></script>
@@ -129,7 +129,7 @@ can be provided anywhere in the SVG file. For the above figure the SVG looks as 
 <a class="reference download internal" download="" href="_downloads/f3edd92abfa46114c05eee661d38ff8d/example_plot_p0_demo.csv"><code class="xref download docutils literal notranslate"><span class="pre">CSV</span></code></a> of the x and y data (here U and v) and a <a class="reference download internal" download="" href="_downloads/b9a2e6146cfab3d7011df7885b2a98b9/example_plot_p0_demo.json"><code class="xref download docutils literal notranslate"><span class="pre">JSON</span></code></a> file with metadata.
 The sampling of the <em>bezier paths</em> can be set by <code class="docutils literal notranslate"><span class="pre">--sampling-interval</span></code> which specifies the sampling interval in x units.
 In this specific case also indicate that the axes are <code class="docutils literal notranslate"><span class="pre">--skewed</span></code>.</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>svgdigitizer<span class="w"> </span>figure<span class="w"> </span>example_plot_p0_demo.svg<span class="w"> </span>--sampling-interval<span class="w"> </span><span class="m">0</span>.01<span class="w"> </span>--skewed
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>svgdigitizer<span class="w"> </span>digitize<span class="w"> </span>example_plot_p0_demo.svg<span class="w"> </span>--sampling-interval<span class="w"> </span><span class="m">0</span>.01<span class="w"> </span>--skewed
 </pre></div>
 </div>
 </section>
@@ -327,7 +327,10 @@ In this specific case also indicate that the axes are <code class="docutils lite
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/0527bbc2b7f9ed5b9f05fd6cbe0b96a0123c59d24710fe15153ba6f0ee059c08.png" src="_images/0527bbc2b7f9ed5b9f05fd6cbe0b96a0123c59d24710fe15153ba6f0ee059c08.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;U [V]&#39;, ylabel=&#39;v [m / s]&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/5949d51e011ecad297a67c192be270dff53aab183184af95dd76f526b3df94c8.png" src="_images/5949d51e011ecad297a67c192be270dff53aab183184af95dd76f526b3df94c8.png" />
 </div>
 </div>
 </section>
@@ -355,10 +358,19 @@ In this specific case also indicate that the axes are <code class="docutils lite
 <ul class="simple">
 <li><p><a class="reference internal" href="api/cv.html"><span class="std std-doc">cyclic voltammograms</span></a> (<em>I</em> vs. <em>E</em> — current vs. potential curves or <em>j</em> vs. <em>E</em> — current density vs. potential curves) commonly found in electrochemistry. For further details and requirements refer to the specific instructions of the <a class="reference internal" href="api/cv.html"><span class="std std-doc">cv module</span></a> itself or the detailed description on how to <a class="reference internal" href="workflow.html"><span class="std std-doc">digitize cyclic voltammograms</span></a> for the <a class="reference external" href="https://www.echemdb.org/">echemdb</a>.</p></li>
 </ul>
-<p>If you have used this project in the preparation of a publication, please cite it as described <a class="reference external" href="https://zenodo.org/records/5881475">on our zenodo page</a>.</p>
+<p>If you have used this project in the preparation of a publication, please cite it using the DOI <a class="reference external" href="https://doi.org/10.5281/zenodo.5874747">10.5281/zenodo.5874747</a>, which always refers to the latest release. Please also state the version of the svgdigitizer you used.</p>
 <section id="datapackage-interaction">
 <h2>Datapackage interaction<a class="headerlink" href="#datapackage-interaction" title="Link to this heading"></a></h2>
 <p>Datapackges created with <code class="docutils literal notranslate"><span class="pre">svgplot</span></code> (or modules inheriting from <code class="docutils literal notranslate"><span class="pre">svgplot</span></code> such as <code class="docutils literal notranslate"><span class="pre">cv</span></code>) can be loaded with the <a class="reference external" href="https://echemdb.github.io/unitpackage/">‘unitpackage’ module</a> to create a database of the digitized data. In case your own data has the same datapackage structure, the digitized data can easily be compared with your own data.</p>
+</section>
+<section id="contributing-and-support">
+<h2>Contributing and support<a class="headerlink" href="#contributing-and-support" title="Link to this heading"></a></h2>
+<p>Contributions are welcome! Please read our <a class="reference external" href="https://github.com/echemdb/svgdigitizer/blob/master/CONTRIBUTING.md">contributing guidelines</a> to learn how to set up a development environment, run the tests and submit a pull request.</p>
+<ul class="simple">
+<li><p>Report bugs and request features in the <a class="reference external" href="https://github.com/echemdb/svgdigitizer/issues">issue tracker</a>.</p></li>
+<li><p>Ask usage questions by opening an <a class="reference external" href="https://github.com/echemdb/svgdigitizer/issues/new">issue</a> with the <code class="docutils literal notranslate"><span class="pre">question</span></code> label.</p></li>
+</ul>
+<p>Everyone participating in this project is expected to follow our <a class="reference external" href="https://github.com/echemdb/svgdigitizer/blob/master/CODE_OF_CONDUCT.md">Code of Conduct</a>.</p>
 <div class="toctree-wrapper compound">
 </div>
 </section>

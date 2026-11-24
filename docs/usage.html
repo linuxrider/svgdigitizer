@@ -6,16 +6,16 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Usage &mdash; svgdigitizer 0.13.1 documentation</title>
+  <title>Usage &mdash; svgdigitizer 0.16.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
-      <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
       <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=b4617fb1"></script>
+      <script src="_static/documentation_options.js?v=7de89ed4"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="_static/design-tabs.js?v=f930bc37"></script>
@@ -131,18 +131,18 @@
 <p>When the figure is included inside a PDF use the svgdigitizer <a class="reference internal" href="cli.html"><span class="std std-doc">CLI</span></a> to create an SVG from the PDF by typing.</p>
 <div class="cell tag_remove-stderr docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>svgdigitizer<span class="w"> </span>paginate<span class="w"> </span>./files/others/looping.pdf
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>svgdigitizer<span class="w"> </span>paginate<span class="w"> </span>./files/others/looping.pdf<span class="w"> </span>--pages<span class="w"> </span><span class="m">1</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>An SVG file is created for each page of the PDF. The image is locked and acts as static background object.</p>
+<p>An SVG file is created for the specified page of the PDF. The image is locked and acts as static background object.</p>
 </section>
 </section>
 <section id="svg-annotation-basics">
 <h2>SVG Annotation (Basics)<a class="headerlink" href="#svg-annotation-basics" title="Link to this heading"></a></h2>
-<p>We consider the following <a class="reference download internal" download="" href="_downloads/476d7e244b5a3d0d323f5abc7d9e86e2/looping_p0.png"><code class="xref download docutils literal notranslate"><span class="pre">example</span> <span class="pre">figure</span></code></a>.</p>
-<a class="reference internal image-reference" href="_images/looping_p0.png"><img alt="_images/looping_p0.png" class="align-center" src="_images/looping_p0.png" style="width: 500px;" />
+<p>We consider the following <a class="reference download internal" download="" href="_downloads/d5456b5efe681b988832a938fe5a6bfa/looping_p1.png"><code class="xref download docutils literal notranslate"><span class="pre">example</span> <span class="pre">figure</span></code></a>.</p>
+<a class="reference internal image-reference" href="_images/looping_p1.png"><img alt="_images/looping_p1.png" class="align-center" src="_images/looping_p1.png" style="width: 500px;" />
 </a>
 <p>The minimum requirements to digitize such a figure with <code class="docutils literal notranslate"><span class="pre">svgdigitizer</span></code> are:</p>
 <ul class="simple">
@@ -154,7 +154,7 @@
 </li>
 <li><p>Tracing the curve with a <em>bezier path</em>  which is grouped with a text label of type <code class="docutils literal notranslate"><span class="pre">curve:</span> <span class="pre">identifier</span></code> (<a class="reference internal" href="#curvetracing"><span class="std std-ref">see below</span></a>)</p></li>
 </ul>
-<p>An <a class="reference download internal" download="" href="_downloads/f2fc828c330e883e90decece763656ec/looping.svg"><code class="xref download docutils literal notranslate"><span class="pre">annotated</span> <span class="pre">SVG</span></code></a> of the example figure is shown below and can be explored locally by placing it in the same folder as the <a class="reference download internal" download="" href="_downloads/476d7e244b5a3d0d323f5abc7d9e86e2/looping_p0.png"><code class="xref download docutils literal notranslate"><span class="pre">example</span> <span class="pre">figure</span></code></a> above.</p>
+<p>An <a class="reference download internal" download="" href="_downloads/f2fc828c330e883e90decece763656ec/looping.svg"><code class="xref download docutils literal notranslate"><span class="pre">annotated</span> <span class="pre">SVG</span></code></a> of the example figure is shown below and can be explored locally by placing it in the same folder as the <a class="reference download internal" download="" href="_downloads/d5456b5efe681b988832a938fe5a6bfa/looping_p1.png"><code class="xref download docutils literal notranslate"><span class="pre">example</span> <span class="pre">figure</span></code></a> above.</p>
 <a class="bg-primary mb-1 reference internal image-reference" href="_images/looping_annotated.png"><img alt="_images/looping_annotated.png" class="bg-primary mb-1 align-center" src="_images/looping_annotated.png" style="width: 500px;" />
 </a>
 <p>The figure can be retraced, for example in 0.01 steps, with respect to the x-axis values with the API.</p>
@@ -174,21 +174,22 @@
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No text with scan rate found in the SVG or provided metadata.
 </pre></div>
 </div>
-<img alt="_images/2f189bd43bb910375c97da89892cb9a4f6673f35803ecbe64fdb9d8c170057f0.png" src="_images/2f189bd43bb910375c97da89892cb9a4f6673f35803ecbe64fdb9d8c170057f0.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;d [m]&#39;, ylabel=&#39;height [m]&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/4d324df2534a1cec312c98e61f6b1f114fc13633b601f624c1a2dca9422edff3.png" src="_images/4d324df2534a1cec312c98e61f6b1f114fc13633b601f624c1a2dca9422edff3.png" />
 </div>
 </div>
 <p>Alternatively the data can be digitized with the <a class="reference internal" href="cli.html"><span class="std std-doc">CLI</span></a></p>
 <div class="cell tag_remove-stderr docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>svgdigitizer<span class="w"> </span>figure<span class="w"> </span>looping.svg<span class="w"> </span>--sampling_interval<span class="w"> </span><span class="m">0</span>.01
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>svgdigitizer<span class="w"> </span>digitize<span class="w"> </span>./files/others/looping.svg<span class="w"> </span>--sampling-interval<span class="w"> </span><span class="m">0</span>.01
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Usage: svgdigitizer figure [OPTIONS] SVG
-Try &#39;svgdigitizer figure --help&#39; for help.
-
-Error: No such option: --sampling_interval Did you mean --sampling-interval?
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No text with scan rate found in the SVG or provided metadata.
+No figure label found in the SVG. If the plot originates from a publication, consider adding a text label such as `figure: 1a` to the SVG.
 </pre></div>
 </div>
 </div>
@@ -352,19 +353,22 @@ Error: No such option: --sampling_interval Did you mean --sampling-interval?
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/0527bbc2b7f9ed5b9f05fd6cbe0b96a0123c59d24710fe15153ba6f0ee059c08.png" src="_images/0527bbc2b7f9ed5b9f05fd6cbe0b96a0123c59d24710fe15153ba6f0ee059c08.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;U [V]&#39;, ylabel=&#39;v [m / s]&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/5949d51e011ecad297a67c192be270dff53aab183184af95dd76f526b3df94c8.png" src="_images/5949d51e011ecad297a67c192be270dff53aab183184af95dd76f526b3df94c8.png" />
 </div>
 </div>
 <p>Alternatively use the <a class="reference internal" href="cli.html"><span class="std std-doc">CLI</span></a> and add the option <code class="docutils literal notranslate"><span class="pre">--skewed</span></code></p>
 <div class="cell tag_remove-stderr docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>svgdigitizer<span class="w"> </span>figure<span class="w"> </span>./files/others/example_plot_skewed.svg<span class="w"> </span>--skewed<span class="w"> </span>--sampling-interval<span class="w"> </span><span class="m">0</span>.01
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>svgdigitizer<span class="w"> </span>digitize<span class="w"> </span>./files/others/example_plot_skewed.svg<span class="w"> </span>--skewed<span class="w"> </span>--sampling-interval<span class="w"> </span><span class="m">0</span>.01
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No text with scan rate found in the SVG or provided metadata.
-No text with `figure` containing a label such as `figure: 1a` found in the SVG.
+No figure label found in the SVG. If the plot originates from a publication, consider adding a text label such as `figure: 1a` to the SVG.
 </pre></div>
 </div>
 </div>
@@ -393,19 +397,22 @@ An <a class="reference download internal" download="" href="_downloads/3dd78e4d7
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/7a3a4024d0e8a7183eff26b173057fca08f9eb0fe3d232cbca200a33488ccf3c.png" src="_images/7a3a4024d0e8a7183eff26b173057fca08f9eb0fe3d232cbca200a33488ccf3c.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;d [m]&#39;, ylabel=&#39;height [m]&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/834002b0951a422b2aaf1a67ee1fd33ed7e871bd604245e362ab30e737c7755a.png" src="_images/834002b0951a422b2aaf1a67ee1fd33ed7e871bd604245e362ab30e737c7755a.png" />
 </div>
 </div>
 <p>or simply by using one of the digitizing options of the <a class="reference internal" href="cli.html"><span class="std std-doc">CLI</span></a>.</p>
 <div class="cell tag_remove-stderr docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>svgdigitizer<span class="w"> </span>figure<span class="w"> </span>./files/others/looping_scaling_factor.svg<span class="w"> </span>--sampling-interval<span class="w"> </span><span class="m">0</span>.01
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>svgdigitizer<span class="w"> </span>digitize<span class="w"> </span>./files/others/looping_scaling_factor.svg<span class="w"> </span>--sampling-interval<span class="w"> </span><span class="m">0</span>.01
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No text with scan rate found in the SVG or provided metadata.
-No text with `figure` containing a label such as `figure: 1a` found in the SVG.
+No figure label found in the SVG. If the plot originates from a publication, consider adding a text label such as `figure: 1a` to the SVG.
 </pre></div>
 </div>
 </div>
@@ -443,21 +450,22 @@ An <a class="reference download internal" download="" href="_downloads/d540543f4
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/b5c26ae777cbdf17d73eada44ce366086c7685a03b6c3cfd5c496abb71cb1538.png" src="_images/b5c26ae777cbdf17d73eada44ce366086c7685a03b6c3cfd5c496abb71cb1538.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;d [m]&#39;, ylabel=&#39;height [m]&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/548ff848ff5d8d8ee115ae0654570406260b9edcf78022244b3dba618a77863d.png" src="_images/548ff848ff5d8d8ee115ae0654570406260b9edcf78022244b3dba618a77863d.png" />
 </div>
 </div>
 <p>or simply by using one of the digitizing options of the <a class="reference internal" href="cli.html"><span class="std std-doc">CLI</span></a>.</p>
 <div class="cell tag_remove-stderr docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>svgdigitizer<span class="w"> </span>figure<span class="w"> </span>./files/others/looping_scale_bar.svg<span class="w"> </span>--sampling-interval<span class="w"> </span><span class="m">0</span>.01
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>svgdigitizer<span class="w"> </span>digitize<span class="w"> </span>./files/others/looping_scale_bar.svg<span class="w"> </span>--sampling-interval<span class="w"> </span><span class="m">0</span>.01
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No text with scan rate found in the SVG or provided metadata.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No text with `figure` containing a label such as `figure: 1a` found in the SVG.
+No figure label found in the SVG. If the plot originates from a publication, consider adding a text label such as `figure: 1a` to the SVG.
 </pre></div>
 </div>
 </div>
@@ -488,19 +496,19 @@ An <a class="reference download internal" download="" href="_downloads/d540543f4
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;d&#39;, ylabel=&#39;height&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/648ea95065107bf3979d4c81ea5054599d22ba7a15d06955b0cdb31942856a88.png" src="_images/648ea95065107bf3979d4c81ea5054599d22ba7a15d06955b0cdb31942856a88.png" />
+<img alt="_images/6c7160f0e021d5a7c5a614491a1e45b8d04c3d7b9143cf05302a2d6496deaa8a.png" src="_images/6c7160f0e021d5a7c5a614491a1e45b8d04c3d7b9143cf05302a2d6496deaa8a.png" />
 </div>
 </div>
 <p>Alternatively use one of the digitizing options of the <a class="reference internal" href="cli.html"><span class="std std-doc">CLI</span></a>, omitting the <code class="docutils literal notranslate"><span class="pre">--sampling-interval</span></code> option.</p>
 <div class="cell tag_remove-stderr docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>svgdigitizer<span class="w"> </span>figure<span class="w"> </span>./files/others/looping_scale_bar.svg
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>svgdigitizer<span class="w"> </span>digitize<span class="w"> </span>./files/others/looping_scale_bar.svg
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No text with scan rate found in the SVG or provided metadata.
-No text with `figure` containing a label such as `figure: 1a` found in the SVG.
+No figure label found in the SVG. If the plot originates from a publication, consider adding a text label such as `figure: 1a` to the SVG.
 </pre></div>
 </div>
 </div>
@@ -554,6 +562,8 @@ No text with `figure` containing a label such as `figure: 1a` found in the SVG.
                                                                            &#39;unit&#39;: &#39;m&#39;,
                                                                            &#39;orientation&#39;: &#39;vertical&#39;}],
                                                                &#39;comment&#39;: &#39;&#39;,
+                                                               &#39;software&#39;: {&#39;name&#39;: &#39;svgdigitizer&#39;,
+                                                                            &#39;version&#39;: &#39;0.16.0&#39;},
                                                                &#39;scanRate&#39;: {&#39;value&#39;: 30.0,
                                                                             &#39;unit&#39;: &#39;m &#39;
                                                                                     &#39;/ &#39;

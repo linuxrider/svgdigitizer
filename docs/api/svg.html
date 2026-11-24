@@ -6,16 +6,16 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>svgdigitizer.svg &mdash; svgdigitizer 0.13.1 documentation</title>
+  <title>svgdigitizer.svg &mdash; svgdigitizer 0.16.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
-      <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
       <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=b4617fb1"></script>
+      <script src="../_static/documentation_options.js?v=7de89ed4"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../_static/design-tabs.js?v=f930bc37"></script>
@@ -23,7 +23,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="svgdigitizer.svgplot" href="svgplot.html" />
-    <link rel="prev" title="svgdigitizer.electrochemistry.cv" href="cv.html" /> 
+    <link rel="prev" title="svgdigitizer.pdf" href="pdf.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -52,6 +52,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../cli.html">Command Line Interface</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">API</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="cv.html"><code class="docutils literal notranslate"><span class="pre">svgdigitizer.electrochemistry.cv</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="pdf.html"><code class="docutils literal notranslate"><span class="pre">svgdigitizer.pdf</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">svgdigitizer.svg</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#svgdigitizer.svg.LabeledPath"><code class="docutils literal notranslate"><span class="pre">LabeledPath</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#svgdigitizer.svg.LabeledPath.far"><code class="docutils literal notranslate"><span class="pre">LabeledPath.far</span></code></a></li>
@@ -170,7 +171,8 @@ group:</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="svgdigitizer.svg.LabeledPath.far">
 <em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">far</span></span><a class="headerlink" href="#svgdigitizer.svg.LabeledPath.far" title="Link to this definition"></a></dt>
-<dd><p>Return the end point of this path that is furthest away from the label.</p>
+<dd><p>Return the end point of this path that is furthest away from the label.
+It calculates the orthogonal distance to a line through the text anchor, taking into account a rotation of the text.</p>
 <p>EXAMPLES:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">io</span><span class="w"> </span><span class="kn">import</span> <span class="n">StringIO</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">svg</span> <span class="o">=</span> <span class="n">SVG</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;&#39;&#39;</span>
@@ -183,6 +185,28 @@ group:</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">path</span> <span class="o">=</span> <span class="n">svg</span><span class="o">.</span><span class="n">get_labeled_paths</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">path</span><span class="o">.</span><span class="n">far</span>
 <span class="go">(100.0, 0.0)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">svg</span> <span class="o">=</span> <span class="n">SVG</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="gp">... </span><span class="s1">&lt;svg&gt;</span>
+<span class="gp">... </span><span class="s1">  &lt;g&gt;</span>
+<span class="gp">... </span><span class="s1">    &lt;path d=&quot;M -100 100 L 100 100&quot; /&gt;</span>
+<span class="gp">... </span><span class="s1">    &lt;text x=&quot;0&quot; y=&quot;50&quot; transform=&quot;rotate(50)&quot;&gt;curve: 0&lt;/text&gt;</span>
+<span class="gp">... </span><span class="s1">  &lt;/g&gt;</span>
+<span class="gp">... </span><span class="s1">&lt;/svg&gt;&#39;&#39;&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path</span> <span class="o">=</span> <span class="n">svg</span><span class="o">.</span><span class="n">get_labeled_paths</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path</span><span class="o">.</span><span class="n">far</span>
+<span class="go">(-100.0, 100.0)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">svg</span> <span class="o">=</span> <span class="n">SVG</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="gp">... </span><span class="s1">&lt;svg&gt;</span>
+<span class="gp">... </span><span class="s1">  &lt;g&gt;</span>
+<span class="gp">... </span><span class="s1">    &lt;path d=&quot;M -100 100 L 100 100&quot; /&gt;</span>
+<span class="gp">... </span><span class="s1">    &lt;text x=&quot;0&quot; y=&quot;50&quot; transform=&quot;rotate(-50)&quot;&gt;curve: 0&lt;/text&gt;</span>
+<span class="gp">... </span><span class="s1">  &lt;/g&gt;</span>
+<span class="gp">... </span><span class="s1">&lt;/svg&gt;&#39;&#39;&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path</span> <span class="o">=</span> <span class="n">svg</span><span class="o">.</span><span class="n">get_labeled_paths</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path</span><span class="o">.</span><span class="n">far</span>
+<span class="go">(100.0, 100.0)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -411,7 +435,7 @@ texts:</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">svg</span> <span class="o">=</span> <span class="n">SVG</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;&#39;&#39;</span>
 <span class="gp">... </span><span class="s1">&lt;svg&gt;</span>
 <span class="gp">... </span><span class="s1">  &lt;g transform=&quot;translate(100, 10)&quot;&gt;</span>
-<span class="gp">... </span><span class="s1">    &lt;text x=&quot;0&quot; y=&quot;0&quot; transform=&quot;translate(100, 10)&quot;&gt;curve: 0&lt;/text&gt;</span>
+<span class="gp">... </span><span class="s1">    &lt;text x=&quot;0&quot; y=&quot;0&quot; transform=&quot;translate(100, 10) rotate(30)&quot;&gt;curve: 0&lt;/text&gt;</span>
 <span class="gp">... </span><span class="s1">  &lt;/g&gt;</span>
 <span class="gp">... </span><span class="s1">&lt;/svg&gt;&#39;&#39;&#39;</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">transformed</span> <span class="o">=</span> <span class="n">svg</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">svg</span><span class="o">.</span><span class="n">svg</span><span class="o">.</span><span class="n">getElementsByTagName</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
@@ -470,7 +494,7 @@ texts:</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="cv.html" class="btn btn-neutral float-left" title="svgdigitizer.electrochemistry.cv" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pdf.html" class="btn btn-neutral float-left" title="svgdigitizer.pdf" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="svgplot.html" class="btn btn-neutral float-right" title="svgdigitizer.svgplot" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
